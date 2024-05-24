@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Parqueo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Estacionamiento</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Formulario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="img">
+        <div class="container">
+            <form id="parking-form">
+                <div class="form-row">
+                    <div>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div>
+                        <label for="matricula">Matrícula:</label>
+                        <input type="text" id="matricula" name="matricula" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label for="color">Color del Auto:</label>
+                        <input type="text" id="color" name="color" required>
+                    </div>
+                    <div>
+                        <label for="categoria">Categoría:</label>
+                        <select id="categoria" name="categoria">
+                            <option value="auto">Auto</option>
+                            <option value="moto">Moto</option>
+                            <option value="camioneta">Camioneta</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label for="precio">Precio por Hora:</label>
+                        <select id="precio" name="precio">
+                            <option value="20">1h = 20bs</option>
+                            <option value="30">2h = 30bs</option>
+                            <option value="40">3h = 40bs</option>
+                            <option value="50">4h = 50bs</option>
+                            <option value="60">5h = 60bs</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>&nbsp;</label>
+                        <button type="button" id="editar">Editar</button>
+                    </div>
+                </div>
+                <div class="form-row single-button-row">
+                    <button type="submit">Solicitar Servicio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
