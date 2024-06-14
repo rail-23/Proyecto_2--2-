@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parking 2024</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+  <header class="padre">
+    <div class="logo">
+      <img src="img/Sign Vector & Graphics to Download.jpg" alt="Logo">
+    </div>
+    <h1>PARKING 2024</h1>
+  </header>
+  
+  <div class="contenedor-padre">
+    <aside class="formulario-container">
+      <form id="autoForm">
+        <h2>Detalles del Auto</h2>
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado">
+          <option value="desocupado">Desocupado</option>
+          <option value="ocupado">Ocupado</option>
+          <option value="reserva">Reserva</option>
+        </select>
+        
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color">
+        
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" name="categoria">
+          <option value="auto">Auto</option>
+          <option value="moto">Moto</option>
+          <option value="camioneta">Camioneta</option>
+        </select>
+        
+        <label for="pasillo">Pasillo:</label>
+        <input type="text" id="pasillo" name="pasillo">
+        
+        <label for="seccion">Sección:</label>
+        <input type="text" id="seccion" name="seccion">
+        
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca">
+        
+        <label for="duracion">Duración:</label>
+        <select id="duracion" name="duracion">
+            <option value="sin_duracion">Sin duración</option>
+            <option value="1">1 hora = 15bs</option>
+            <option value="2">2 horas = 25bs</option>
+            <option value="3">3 horas=30bs</option>
+        </select>
+        
+        <div class="form-buttons">
+          <button type="button" id="updateButton">Actualizar</button>
+          <button type="button" id="cancelButton">Cancelar</button>
+          <button type="button" id="verEstadistica">Ver estadistica</button>
+        </div>
+      </form>
+    </aside>
+    
+    <main class="contenedor-cuadros">
+      <section class="contenedordivicion">
+        <div class="container1">
+          <div class="auto-container" data-index="1"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="2"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="3"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="4"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="5"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="6"><auto-card></auto-card></div>
+        </div>
+      </section>
+      
+      <section class="contenedordivicion2">
+        <div class="container2">
+          <div class="auto-container" data-index="7"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="8"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="9"><auto-card></auto-card></div>
+        </div>
+        <div class="container2">
+          <div class="auto-container" data-index="10"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="11"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="12"><auto-card></auto-card></div>
+        </div>
+      </section>
+      
+      <section class="contenedordivicion3">
+        <div class="container3">
+          <div class="auto-container" data-index="13"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="14"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="15"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="16"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="17"><auto-card></auto-card></div>
+          <div class="auto-container" data-index="18"><auto-card></auto-card></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="AutoCard.js"></script>
+
+  <script>
+    const updateButton = document.getElementById('updateButton');
+    const showStatisticsButton = document.getElementById('verEstadistica');
+
+   
+    function updateStatistics() {
+      const autos = JSON.parse(localStorage.getItem('autos')) || [];
+      const estadisticas = {
+        total: autos.length,
+        ocupados: autos.filter(auto => auto.estado === 'ocupado').length,
+        desocupados: autos.filter(auto => auto.estado === 'desocupado').length,
+        reservas: autos.filter(auto => auto.estado === 'reserva').length,
+        autos: autos.filter(auto => auto.categoria === 'auto').length,
+        motos: autos.filter(auto => auto.categoria === 'moto').length,
+        camionetas: autos.filter(auto => auto.categoria === 'camioneta').length
+      };
+      localStorage.setItem('estadisticas', JSON.stringify(estadisticas));
+    }
+
+  
+    updateButton.addEventListener('click', () => {
+      const estado = document.getElementById('estado').value;
+      const color = document.getElementById('color').value;
+      const categoria = document.getElementById('categoria').value;
+      const pasillo = document.getElementById('pasillo').value;
+      const seccion = document.getElementById('seccion').value;
+      const marca = document.getElementById('marca').value;
+      const duracion = document.getElementById('duracion').value;
+      const index = parseInt(document.querySelector('.auto-container.selected').dataset.index);
+
+      const autoDetails = {
+        estado,
+        color,
+        categoria,
+        pasillo,
+        seccion,
+        marca,
+        duracion,
+        index
+      };
+
+    
+      let autos = JSON.parse(localStorage.getItem('autos')) || [];
+
+      autos = autos.filter(auto => auto.index !== index);
+     
+      autos.push(autoDetails);
+  
+      localStorage.setItem('autos', JSON.stringify(autos));
+
+      updateStatistics();
+
+
+      const autoContainer = document.querySelector(`.auto-container[data-index="${index}"]`);
+      autoContainer.classList.remove('desocupado', 'ocupado', 'reserva');
+      autoContainer.classList.add(estado);
+
+      alert('Datos actualizados y almacenados localmente');
+    });
+
+ 
+    document.querySelectorAll('.auto-container').forEach(div => {
+      div.addEventListener('click', () => {
+        document.querySelectorAll('.auto-container').forEach(div => div.classList.remove('selected'));
+        div.classList.add('selected');
+      });
+    });
+
+    showStatisticsButton.addEventListener('click', () => {
+      window.open('Estadistica.html', '_blank');
+    });
+  </script>
+</body>
+</html>

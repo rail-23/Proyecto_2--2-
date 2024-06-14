@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadistica</title>
+  <link rel="stylesheet" href="estadistica.css">
+</head>
+  <body>
+    <header>
+      <h1>Estadísticas de Parking</h1>
+    </header><main><section id="estadisticas"></section></main>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const estadisticasContainer = document.getElementById('estadisticas');
+        const estadisticas = JSON.parse(localStorage.getItem('estadisticas')) || {};
+  
+        if (!estadisticas.total) {
+          estadisticasContainer.innerHTML = '<p>No hay datos para mostrar.</p>';
+          return;
+        }
+  
+        estadisticasContainer.innerHTML = `
+          <div class="stat">
+            <h2>Total de vehículos</h2>
+            <p>${estadisticas.total}</p>
+          </div>
+          <div class="stat">
+            <h2>Ocupados</h2>
+            <p>${estadisticas.ocupados}</p>
+          </div>
+
+          <div class="stat">
+            <h2>Reservas</h2>
+            <p>${estadisticas.reservas}</p>
+          </div>
+          <div class="stat">
+            <h2>Autos</h2>
+            <p>${estadisticas.autos}</p>
+          </div>
+          <div class="stat">
+            <h2>Motos</h2>
+            <p>${estadisticas.motos}</p>
+          </div>
+          <div class="stat">
+            <h2>Camionetas</h2>
+            <p>${estadisticas.camionetas}</p>
+          </div>
+        `;
+      });
+    </script>
+    <p>los datos de ultima ves se actulizaran despue de 24 por lado <br>
+    del administrador se le pide no alterar ni modificar ATT la administracion</p>
+
+</body>
+</html>

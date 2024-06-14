@@ -1,0 +1,61 @@
+
+@media (max-width: 768px) {
+  .contenedor-padre {
+    flex-direction: column;
+  }
+
+  .formulario-container {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .contenedor-cuadros {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .contenedordivicion, .contenedordivicion2, .contenedordivicion3 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auto-container {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .padre {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .padre h1 {
+    margin: 10px 0 0 0;
+    font-size: 2rem;
+  }
+
+  .logo img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .form-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #updateButton, #cancelButton {
+    width: 100%;
+  }
+
+  .contenedor-cuadros {
+    padding: 5px;
+  }
+
+  .auto-container {
+    padding: 10px;
+  }
+}
